@@ -1,15 +1,10 @@
-getwd()
-setwd("C:/Users/lokma/Desktop/DS612")
-update.packages()
-file.edit('DS 612 - Lecture 1 R.R')
-df <- read.csv("C:/Users/lokma/Desktop/DS612/data/health_data.csv",
-               header=FALSE)
+# This is the introductory to R:
 
 # Find out where is your working directory 'wd'
 getwd()
 
 # Setting the working directory for your project or work
-setwd("Path to the directory")
+setwd("Enter the path to the working directory")
 
 # Updating the current libraries or packages in R environment
 update.packages()
