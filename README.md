@@ -5,10 +5,10 @@ An introduction to statistical learning with application in R.  This course will
 We are using "An Introduction to Statistical Learning with Application in R" by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani in this course.  You can check the textbook details [online](http://faculty.marshall.usc.edu/gareth-james/).
 
 ## Course Outline
-Introduction to R
--
+### Introduction to R
 In this lab, we will introduce some simple R commands.  The best way to learn a new language is to try it out.  R can be downloaded from [here](http://cran.r-project.org/)
 
+Learning Objectives:
 1. Learning how to find and set your working directory on your machine.
 2. Learning how to use simple function to create vector and matrix
 3. Leanring how to use the help function in R.
