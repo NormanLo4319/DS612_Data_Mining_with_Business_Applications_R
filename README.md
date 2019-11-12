@@ -18,8 +18,15 @@ Learning Objectives:
 7. Learning how to load data from working directory and saving it to a specific directory.
 
 
-Statistical Learning
-- 
+### Statistical Learning
+In this section, we will explain the use of statistical learning.  We are going to outline some of the key theoretical concepts that we used to build the founction of statistical learning.
+
+Learning Objectives:
+1. What is Statistical Learning?
+2. Trade-Off between Prediction Accuracy and Model Interpretability
+3. Supervised vs. Unsupervised Learning
+4. Regression vs. Classification Problems
+5. Assessing Model Accuracy (Measuring the Quality of Fit, Bias-Variance Trade-off, and Classification Setting)
 
 Linear Regression
 - 
