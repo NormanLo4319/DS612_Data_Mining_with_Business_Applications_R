@@ -27,12 +27,31 @@ Learning Objectives:
 3. Supervised vs. Unsupervised Learning
 4. Regression vs. Classification Problems
 5. Assessing Model Accuracy (Measuring the Quality of Fit, Bias-Variance Trade-off, and Classification Setting)
+6. K-Nearest Neighbors Model
 
-Linear Regression
-- 
+### Linear Regression:
+We are going to learn and apply one of the most popular supervised learning technique called "Linear Regression".  It is a useful tool for predicting a quantitative response and has been arround for a long time.  In this section, we will review some of the key ideas underlying the linear regression model, as well as the least squares approach that is most commonly used to fit this model.
 
-Classification
-- 
+Learning Objectives:
+1. Estimating and Assessing the Accuracy of the Coefficient
+2. Evaluating the Goodness of Fit of the Model
+3. Estimating Multiple Regression Coefficients
+4. Using the Qualitative Predictors (Categorical Analysis)
+5. Potential Problems of the Model
+
+### Classification:
+The linear regrssion model assumes that the response variable (dependent variable) is quantitative (coninuous).  However, the response varaible is instead qualitative (discrete / categorical).  A process used for predicting qualitative responses is known as classification.  There are many classification techniques, or classifiers, that one might use to predict a qualitative response.  In this section, we will cover three of the most widely-used classifiers: Logistic Regression, Linear Discriminant Analysis, and K-Nearnest Neighbors.
+
+Learning Ojbectives:
+1. Logistic Regresion
+- Estimating the Regression Coefficents
+- Logistic Regression for More than 2 Response Classes
+2. Linear Discriminant Analysis
+- Using Bayes' Theorem for Classification
+- Linear Discriminant Analysis for P = 1
+- Linear Discriminant Analysis for P > 1
+- Quadratic Discriminant Analysis
+3. Comparison of Classification Methods
 
 Resampling Methods
 - 
