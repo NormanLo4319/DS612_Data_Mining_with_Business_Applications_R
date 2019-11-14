@@ -5,7 +5,8 @@ An introduction to statistical learning with application in R.  This course will
 We are using "An Introduction to Statistical Learning with Application in R" by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani in this course.  You can check the textbook details [online](http://faculty.marshall.usc.edu/gareth-james/).
 
 ## Course Outline
-### Introduction to R
+### Introduction to R:
+---
 In this lab, we will introduce some simple R commands.  The best way to learn a new language is to try it out.  R can be downloaded from [here](http://cran.r-project.org/)
 
 Learning Objectives:
@@ -18,7 +19,8 @@ Learning Objectives:
 7. Learning how to load data from working directory and saving it to a specific directory.
 
 
-### Statistical Learning
+### Statistical Learning:
+---
 In this section, we will explain the use of statistical learning.  We are going to outline some of the key theoretical concepts that we used to build the founction of statistical learning.
 
 Learning Objectives:
@@ -30,6 +32,7 @@ Learning Objectives:
 6. K-Nearest Neighbors Model
 
 ### Linear Regression:
+---
 We are going to learn and apply one of the most popular supervised learning technique called "Linear Regression".  It is a useful tool for predicting a quantitative response and has been arround for a long time.  In this section, we will review some of the key ideas underlying the linear regression model, as well as the least squares approach that is most commonly used to fit this model.
 
 Learning Objectives:
@@ -40,6 +43,7 @@ Learning Objectives:
 5. Potential Problems of the Model
 
 ### Classification:
+---
 The linear regrssion model assumes that the response variable (dependent variable) is quantitative (coninuous).  However, the response varaible is instead qualitative (discrete / categorical).  A process used for predicting qualitative responses is known as classification.  There are many classification techniques, or classifiers, that one might use to predict a qualitative response.  In this section, we will cover three of the most widely-used classifiers: Logistic Regression, Linear Discriminant Analysis, and K-Nearnest Neighbors.
 
 Learning Ojbectives:
