@@ -57,8 +57,16 @@ Learning Ojbectives:
 - Quadratic Discriminant Analysis
 3. Comparison of Classification Methods
 
-Resampling Methods
-- 
+### Resampling Methods:
+---
+In this section, we consider a class of methods that estimate the test error rate by holding out a subset of the training observatios from the fitting process, and then applying the statistical learning method to those held out observations.
+
+Learning Objectives:
+1. Cross Validation
+- Validation SEt Appraoch
+- Leave-One-Out Cross Validation
+- k-Fold Cross Validation
+- Bias Variance Trade-Off for k-Fold Cross Validation
 
 Tree-Based Methods
 - 
