@@ -68,8 +68,20 @@ Learning Objectives:
 - k-Fold Cross Validation
 - Bias Variance Trade-Off for k-Fold Cross Validation
 
-Tree-Based Methods
-- 
+### Tree-Based Methods:
+---
+Tree-Based Methods for regression and classification are simple and useful for interpretation.  These methods involve stratifying or sementing the predictor space into a number of simple regions.  Since the set of splitting rules used to segment the predictor space can be summarized in a tree, these type of approaches are known as decision tree methods.  In this section, we introduce bagging, random forests, and boosting, which involves producing multiple trees and combined to yiled a single consensus prediction.
+
+Learning Objectives:
+1. Basic of Decision Tree
+- Regression Tree
+- Classification Trees
+- Trees vs. Linear Models
+- Advantages and Disavantages of Trees
+2. Bagging, Random Forests, Boosting
+- Bagging
+- Random Forests
+- Boosting
 
 Moving Beyond Linearity
 -
