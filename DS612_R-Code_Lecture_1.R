@@ -1,4 +1,4 @@
-# This is the introductory to R:
+# This is introductory to R:
 
 # Find out where is your working directory 'wd'
 getwd()
@@ -101,7 +101,7 @@ z
 # You can check the rnorm function by using the help function '?'
 ?rnorm
 
-# Using rnorm() to create a vector t with 50 random t-scores (standardized scores with mean=5 and sd=10)
+# Using rnorm() to create a vector t with 50 random t-scores (standardized scores with mean=5 and std=10)
 t = rnorm(50,mean = 5, sd = 10)
 t
 
