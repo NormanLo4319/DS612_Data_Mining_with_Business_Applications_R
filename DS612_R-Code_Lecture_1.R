@@ -163,7 +163,7 @@ origin = as.factor(origin)
 # As you can see, the plot is not defined as box plot because "origin" is not treated as catagorical data 
 plot(origin,mpg)
 
-# R has a pairs(), which returns a plot matrix consisting of scater plots for each varaible-combination of a data frame.
+# R has a pairs(), which returns a plot matrix consisting of scatter plots for each variable-combination of a data frame.
 pairs(AutoData)
 
 # We can also specify the columns in the data frame for the plot matrix
