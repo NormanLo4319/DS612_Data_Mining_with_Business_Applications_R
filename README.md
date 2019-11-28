@@ -1,4 +1,4 @@
-# DS612_Data_Mining_with_Business_Applications
+# Data Mining with Business Applications (R)
 An introduction to statistical learning with application in R.  This course will help students develop Statistical Learning techniques to extract pertinent information from data and make informed business decisions.
 
 ## Textbook
