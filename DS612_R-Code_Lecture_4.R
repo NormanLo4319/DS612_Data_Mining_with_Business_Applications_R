@@ -8,11 +8,20 @@
 # Import ISLR library
 require(ISLR)
 
+# Importing xlsx package for exporting data set to xlsx format
+install.packages('xlsx')
+library("xlsx")
+names(Default)
+write.xlsx(Default, 'Path\\File Name', row.names=FALSE)
+
 # Call out the Smarket data set
 names(Smarket)
 
 # print summary of the data set
 summary(Smarket)
+
+# Export dataset to csv file
+write.csv(Smarket, 'path\\File Name', row.names=FALSE)
 
 # Learning more about the data set
 ?Smarket

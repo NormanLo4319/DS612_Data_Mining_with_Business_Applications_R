@@ -20,7 +20,7 @@ x[2]
 a = TestFunction(10, 20)
 
 # Let's practice creating a function that take two vectors a and b.
-# The DistanceTest() function will be use to calculate the square-root of the sum of squared difference
+# The DistanceTest() function will be used to calculate the square-root of the sum of squared difference
 DistanceTest = function(a,b){
   Dist = sqrt(sum((a-b)^2))
   Dist
