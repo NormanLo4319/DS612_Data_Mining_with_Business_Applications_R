@@ -1,3 +1,8 @@
+#----------------------------#
+#-----Introductory to R:-----#
+#---------(Part II)----------#
+#----------------------------#
+
 # In R, we can create and save our own function to use in the global environment
 # For example we can create a TestFunction() that take two numbers and return sum and product of the two numbers.
 TestFunction = function(number1,number2){
@@ -27,14 +32,14 @@ DistanceTest = function(a,b){
 }
 
 # Create vector x1 and x2
-x1 = c(1,2,3,4)
-x2 = c(0,0,1,2)
+x1 -> c(1,2,3,4)
+x2 -> c(0,0,1,2)
 
 # Using the DistanceTest function to calculate the result
 DistanceTest(x1,x2)
 
 # We can manually check the answer by writing the whole equation (hard-coding)
-D= sqrt((1-0)^2+(2-0)^2+(3-1)^2+(4-2)^2)
+D -> sqrt((1-0)^2+(2-0)^2+(3-1)^2+(4-2)^2)
 D
 
 
