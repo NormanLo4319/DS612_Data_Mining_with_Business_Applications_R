@@ -1,12 +1,23 @@
+#---------------------------------------#
+#---------------Chapter 8---------------#
+#-----------Tree-Based Methods----------#
+#---------------------------------------#
+
+# In this section, we are going to use the tree-based methods for regresssion and classification.
+# We first need to install the 'randomForest' and 'ISLR' packages
 install.packages("randomForest")
 install.packages("ISLR")
+
+# Import the libraries for analysis
 library(randomForest)
 library(ISLR)
 library(tree)
-library(MASS) #We need it to for Boston data set
+library(MASS)
 
-
+# We are going to use the Boston data set from MASS library
 ?Boston
+
+
 set.seed(1)
 NumberofObservations = dim(Boston)[1]
 SplitofTrainTest = 0.5 #let's split the data 50/50

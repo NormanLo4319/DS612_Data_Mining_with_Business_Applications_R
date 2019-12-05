@@ -1,20 +1,22 @@
-#----------------------------#
-#-----introductory to R:-----#
-#----------(Part I)----------#
-#----------------------------#
+#--------------------------------------#
+#----------introductory to R:----------#
+#---------------(Part I)---------------#
+#--------------------------------------#
 
 # Find out where is your working directory 'wd'
 getwd()
 
 # Setting the working directory for your project or work
-setwd("Enter the path to the working directory")
+setwd("Your Directory Path!")
 
 # Updating the current libraries or packages in R environment
 update.packages()
 
-# Open a R script file from the current working directory
-file.edit('DS 612 - Lecture 1 R.R')
+# Create a new R script file from the current working directory
+file.edit('Practice.R')
 
+# Clear all the environment variables
+rm(list = ls())
 
 # Basic knowledge for Vectors and Matrices
 # Using function c() to create a vector of elements or a list and store in a variable x
