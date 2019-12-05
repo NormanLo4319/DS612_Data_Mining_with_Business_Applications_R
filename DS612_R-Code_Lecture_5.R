@@ -1,11 +1,25 @@
+#---------------------------------------#
+#---------------Chapter 5---------------#
+#----------Resampling Methods-----------#
+#---------------------------------------#
+
+# For Cross Validation, we need to import ISLM and Bootstrap
 require(ISLR)
 require(boot)
+
+# We are going to use the cv.glm() function for cross validation
 ?cv.glm
+
+# Plot the variables mpg and horsepower from Auto data set
 plot(mpg~horsepower,data=Auto)
 
-## LOOCV
-glm.fit=glm(mpg~horsepower, data=Auto) #Fits a linear model
-cv.glm(Auto,glm.fit)$delta #pretty slow (doesnt use formula (5.2) on page 180)
+# Leave-One-Out Cross Validation (LOOCV)
+# We first fit the data into a simple linear model using the glm() function
+glm.fit <- glm(mpg~horsepower, data=Auto)
+
+# We can then use the cross validation function to run glm model for (n - 1) times
+# pretty slow (doesnt use formula (5.2) on page 180)
+cv.glm(Auto,glm.fit)$delta 
 
 #Delta is the cross-validated prediction error. It gives two numbers. The first 
 #Number is the raw Leave-one-Our or Lieu Cross-Validation Error, and the seond one is
@@ -15,20 +29,23 @@ cv.glm(Auto,glm.fit)$delta #pretty slow (doesnt use formula (5.2) on page 180)
 
 
 ##Lets write a simple function to use formula (5.2)
-loocv=function(fit){
+loocv = function(fit){
   h=lm.influence(fit)$h
   mean((residuals(fit)/(1-h))^2)
 }
 
-## Now we try it out
+# Now we use the loocv() function to perform the cross validation
 loocv(glm.fit)
 
-cv.error=rep(0,10)
-degree=1:10
+# Using a for loop to check the the k-fold cross validation comparison
+cv.error <- rep(0,10)
+degree <- 1:10
 for(d in degree){
   glm.fit=glm(mpg~poly(horsepower,d), data=Auto)
   cv.error[d]=loocv(glm.fit)
 }
+
+# Plot the results and compare different degree for cross validation
 plot(degree,cv.error,type="b")
 
 ## 10-fold CV
@@ -40,11 +57,8 @@ for(d in degree){
 }
 lines(degree,cv.error10,type="b",col="red")
 
-
 ## Bootstrap
 ## Minimum risk investment - Section 5.2
-
-
 
 ## What is the standard error of alpha?
 ?Portfolio

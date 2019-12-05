@@ -31,7 +31,7 @@ plot(medv~lstat,Boston)
 ?lm
 
 # The specification of our model is medv = beta0 + beta1*(lstat) and we are going to save the model into fit1
-fit1 -> lm(medv~lstat,data = Boston)
+fit1 <- lm(medv~lstat,data = Boston)
 
 # Once the model is saved into a variable, we can then print the summary of it.
 summary(fit1)
@@ -47,7 +47,7 @@ names(fit1)
 confint(fit1)
 
 # Setting the 99% confidence interval
-x -> confint(fit1,level=0.99)
+x <- confint(fit1,level=0.99)
 x
 
 # If any question about the function, always make use of the help function
@@ -58,25 +58,25 @@ x
 predict(fit1,data.frame(lstat = c(5,10,15)),interval = "confidence",level = .99)
 
 # We can check if adding a new variable (age) to the model specification would help explaining medv
-fit2 -> lm(medv~lstat+age,data= Boston)
+fit2 <- lm(medv~lstat+age,data= Boston)
 summary(fit2)
 
 # We can also add all the variables from the data set into our model by use "."
-fit3 -> lm(medv~.,data = Boston)
+fit3 <- lm(medv~.,data = Boston)
 summary(fit3)
 
 # If we want to drop some variables from the data set, we can use the negative sign "-"
-fit4 -> lm(medv~.-age-indus,data = Boston)
+fit4 <- lm(medv~.-age-indus,data = Boston)
 summary(fit4)
 
 # Non-linear Transformations or Interation effects
 # Let's add lstat*age interation effect
-fit5 -> lm(medv~lstat*age,data = Boston)
+fit5 <- lm(medv~lstat*age,data = Boston)
 # If you want to keep the interation effect only - you need to use lstat:age
 summary(fit5)
 
 # You can also add a squared term to the model
-fit6 -> lm(medv~lstat+I(lstat^2),data = Boston)
+fit6 <- lm(medv~lstat+I(lstat^2),data = Boston)
 summary(fit6)
 
 # The reason we are using the I() is because we need the function to specify the formula (lstat^2)
@@ -84,7 +84,7 @@ summary(fit6)
 ?I
 
 # Creating a polynomial specification, we can use the function poly()
-fit7 -> lm(medv~poly(lstat,5),data = Boston) 
+fit7 <- lm(medv~poly(lstat,5),data = Boston) 
 summary(fit7)
 
 # How to deal with Qualitative Predictors - Dummy Variables
@@ -98,6 +98,6 @@ names(Carseats)
 summary(Carseats)
 
 # We can also use the lm() function to run the linear model with catagorical varaibles
-fit8 -> lm(Sales~.+Income:Advertising+Age:Price,data = Carseats)
+fit8 <- lm(Sales~.+Income:Advertising+Age:Price,data = Carseats)
 summary(fit1)
 
