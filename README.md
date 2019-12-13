@@ -4,7 +4,7 @@ An introduction to statistical learning with application in R.  This course will
 ## Textbook
 We are using "An Introduction to Statistical Learning with Application in R" by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani in this course.  You can check the textbook details [online](http://faculty.marshall.usc.edu/gareth-james/).
 
-![textbook](images/ISL_Cover.jpg){:height="50%" width="50%"}
+![textbook](images/ISL_Cover.jpg){:height="10%" width="10%"}
 
 ## Course Outline
 ### Introduction to R:
