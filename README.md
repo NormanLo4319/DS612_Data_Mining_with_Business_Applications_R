@@ -85,7 +85,7 @@ Learning Objectives:
 - Random Forests
 - Boosting
 
-### Moving Beyond Linearity
+### Moving Beyond Linearity:
 ---
 In this section, we are relaxing the linearity assumption while still attempting to maintain as much interpretability as possible.  We do this by examining very simple extensions of linear model like polynomial regression and step functions, as well as more sophisticated approaches such as splines, local regression, and generalized additive models.
 1. Polynomial Regression
