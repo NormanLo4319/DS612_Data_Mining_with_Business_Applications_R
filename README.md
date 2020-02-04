@@ -2,9 +2,9 @@
 An introduction to statistical learning with application in R.  This course will help students develop Statistical Learning techniques to extract pertinent information from data and make informed business decisions.
 
 ## Textbook
-We are using "An Introduction to Statistical Learning with Application in R" by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani in this course.  You can check the textbook details [online](http://faculty.marshall.usc.edu/gareth-james/).
+This repositary bases on "An Introduction to Statistical Learning with Application in R" by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.  You can check the textbook details [online](http://faculty.marshall.usc.edu/gareth-james/).
 
-<img src="./images/ISL_Cover.jpg" width="200" height="270">
+<img src="./images/ISL_Cover.jpg" width="180" height="240">
 
 ## Course Outline
 ### Introduction to R:
@@ -19,6 +19,8 @@ Learning Objectives:
 5. Learning the basic of data indexing in R.
 6. Learning the basic plot function for visualization in R.
 7. Learning how to load data from working directory and saving it to a specific directory.
+
+Additional Resource: [Cookbook for R](http://www.cookbook-r.com/)
 
 
 ### Statistical Learning:
@@ -85,7 +87,7 @@ Learning Objectives:
 - Random Forests
 - Boosting
 
-### Moving Beyond Linearity
+### Moving Beyond Linearity:
 ---
 In this section, we are relaxing the linearity assumption while still attempting to maintain as much interpretability as possible.  We do this by examining very simple extensions of linear model like polynomial regression and step functions, as well as more sophisticated approaches such as splines, local regression, and generalized additive models.
 1. Polynomial Regression
