@@ -20,7 +20,7 @@ Learning Objectives:
 6. Learning the basic plot function for visualization in R.
 7. Learning how to load data from working directory and saving it to a specific directory.
 
-Additional Resource: [Cookbook for R](http://www.cookbook-r.com/)
+Additional Resource: [Cookbook for R](http://www.cookbook-r.com/), [R Markdown](https://rmarkdown.rstudio.com/)
 
 
 ### Statistical Learning:
