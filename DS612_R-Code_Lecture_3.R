@@ -54,7 +54,7 @@ x
 ?confint
 ?predict
 
-# 
+# Use the predict function to make prediction of medv
 predict(fit1,data.frame(lstat = c(5,10,15)),interval = "confidence",level = .99)
 
 # We can check if adding a new variable (age) to the model specification would help explaining medv
