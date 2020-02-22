@@ -67,8 +67,8 @@ In this section, we consider a class of methods that estimate the test error rat
 
 Learning Objectives:
 1. Cross Validation
-- Validation SEt Appraoch
-- Leave-One-Out Cross Validation
+- Validation Set Appraoch
+- Leave-One-Out (LOOCV) Cross Validation
 - k-Fold Cross Validation
 - Bias Variance Trade-Off for k-Fold Cross Validation
 
