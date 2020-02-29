@@ -12,6 +12,7 @@ require(ISLR)
 install.packages('xlsx')
 library("xlsx")
 names(Default)
+?Default
 write.xlsx(Default, 'Data\\Textbook_Data\\Default.xlsx', row.names=FALSE)
 
 # Call out the Smarket data set
@@ -73,6 +74,8 @@ train <- Year<2005
 glm.fit <- glm(Direction~Lag1+Lag2+Lag3+Lag4+Lag5+Volume,
             data=Smarket,family=binomial, subset=train)
 
+summary(glm.fit)
+
 # Create the probability function by using the fitted model
 glm.probs <- predict(glm.fit,newdata=Smarket[!train,],type="response") 
 
@@ -101,7 +104,9 @@ table(glm.pred,Direction.2005)
 mean(glm.pred == Direction.2005)
 mean(glm.pred != Direction.2005)
 
-# We are going to use the Linear Discriminant Analysis
+
+
+# Now, we are going to study the Linear Discriminant Analysis
 # The LDA requires the library MASS
 require(MASS)
 
@@ -122,7 +127,7 @@ Smarket.2005 <- subset(Smarket,Year==2005)
 lda.pred <- predict(lda.fit,Smarket.2005)
 
 # Predict the first 5 observations
-lda.pred[1:5,]
+lda.pred$class[1:5]
 
 # Check the class in the prediction function
 class(lda.pred)
@@ -146,7 +151,10 @@ qda.fit <- qda(Direction~Lag1+Lag2,data=Smarket, subset=Year<2005)
 qda.fit
 
 # Plot the model fit
-plot(qda.fit)
+install.packages('klaR')
+library(klaR)
+partimat(Direction~Lag1+Lag2,data=Smarket,method="qda")
+# plot(qda.fit), can no longer plot qda.
 
 # Define the testing data year = 2005 for testing
 Smarket.2005 <- subset(Smarket,Year==2005)
@@ -155,7 +163,9 @@ Smarket.2005 <- subset(Smarket,Year==2005)
 qda.pred <- predict(qda.fit,Smarket.2005)
 
 # Predict the first 5 observations
-qda.pred[1:5,]
+qda.pred$class[1:5]
+
+print(qda.pred)
 
 # Check the class in the prediction function
 class(qda.pred)
