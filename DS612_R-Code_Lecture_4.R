@@ -176,7 +176,7 @@ data.frame(lda.pred)[1:5,]
 # Compare the prediction and testing data in a matrix table
 table(qda.pred$class,Smarket.2005$Direction)
 
-# Check the accuracy from the LDA model
+# Check the accuracy from the QDA model
 mean(qda.pred$class==Smarket.2005$Direction)
 
 
