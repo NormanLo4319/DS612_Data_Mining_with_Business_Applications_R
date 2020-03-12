@@ -7,13 +7,43 @@
 require(ISLR)
 require(boot)
 
-# We are going to use the cv.glm() function for cross validation
-?cv.glm
-
 # Plot the variables mpg and horsepower from Auto data set
 plot(mpg~horsepower,data=Auto)
 
-# Leave-One-Out Cross Validation (LOOCV)
+
+# Validation Set Approach:
+# First create an index for the subset data from the original dataset.
+# For instance, we can create a subset of 300 random sample for the dataset.
+set.seed(1)
+train <- sample(dim(Auto)[1], 300)
+
+# Fit the model with the training set
+fit1 <- lm(mpg~horsepower, data=Auto, subset=train)
+
+# Calcuate the Mean Square Error for the training set (Train Error)
+mean((Auto$mpg-predict(fit1, Auto))[train]^2)
+
+# Calculate the Mean Square Error for the testing set (Test Error)
+mean((Auto$mpg-predict(fit1, Auto))[-train]^2)
+
+# As observed the training error is much smaller than the testing error, which is 
+# in line with our prediction.
+
+# We can continue to the do the same thing for quadratic and cubic regressions.
+fit2 <- lm(mpg~poly(horsepower, 2), data=Auto, subset=train)
+mean((Auto$mpg-predict(fit2, Auto))[train]^2)
+mean((Auto$mpg-predict(fit2, Auto))[-train]^2)
+
+fit3 <- lm(mpg~poly(horsepower, 3), data=Auto, subset=train)
+mean((Auto$mpg-predict(fit3, Auto))[train]^2)
+mean((Auto$mpg-predict(fit3, Auto))[-train]^2)
+
+
+# Leave-One-Out Cross Validation (LOOCV):
+
+# We are going to use the cv.glm() function for cross validation
+?cv.glm
+
 # We first fit the data into a simple linear model using the glm() function
 glm.fit <- glm(mpg~horsepower, data=Auto)
 
@@ -22,12 +52,12 @@ glm.fit <- glm(mpg~horsepower, data=Auto)
 cv.glm(Auto,glm.fit)$delta 
 
 #Delta is the cross-validated prediction error. It gives two numbers. The first 
-#Number is the raw Leave-one-Our or Lieu Cross-Validation Error, and the seond one is
+#Number is the raw Leave-one-Out or Lieu Cross-Validation Error, and the second one is
 #the bias correction has to due to the fact that the data set that we train it on 
-#on is slightly smaller that the one that we actually would like to get the error for, which
+#is slightly smaller that the one that we actually would like to get the error for, which
 #is the full data set of size n.
 
-
+?lm.influence
 ##Lets write a simple function to use formula (5.2)
 loocv = function(fit){
   h=lm.influence(fit)$h
@@ -92,4 +122,24 @@ boot.out
 # Plotting the bootstrap output
 plot(boot.out)
 
-?with
+
+# Estimateing the Accuracy of a Linear Regression Model
+# Create a boostrap function to pass in the data set and index 
+boot.fn <- function(data, index){
+  return(coef(lm(mpg~horsepower, data=data, subset=index)))
+}
+
+# Using the bootstrap function to estimate the coefficiencts by defining the subset of data.
+# For example, we can define to use all 392 observation from the data.
+boot.fn(Auto, 1:392)
+
+# Compare it to the coefficienct with the regular lm() function without specifying subset.
+coef(lm(mpg~horsepower, data=Auto))
+
+# Now, let's try to set up a random seed and generate a random sample with replacement.
+set.seed(1)
+boot_s1 <- sample(392, 392, replace=TRUE)
+boot.fn(Auto, boot_s1)
+
+boot_s2 <- sample(392, 392, replace=TRUE)
+boot.fn(Auto, boot_s2)
