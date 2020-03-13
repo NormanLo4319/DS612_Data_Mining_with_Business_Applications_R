@@ -71,6 +71,8 @@ Learning Objectives:
 - Leave-One-Out (LOOCV) Cross Validation
 - k-Fold Cross Validation
 - Bias Variance Trade-Off for k-Fold Cross Validation
+2. Bootstrap
+- Estimate the standard error of the coefficient
 
 ### Tree-Based Methods:
 ---
