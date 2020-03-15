@@ -16,11 +16,14 @@ plot(mpg~horsepower,data=Auto)
 # For instance, we can create a subset of 300 random sample for the dataset.
 set.seed(1)
 train <- sample(dim(Auto)[1], 300)
+train
 
 # Fit the model with the training set
 fit1 <- lm(mpg~horsepower, data=Auto, subset=train)
+summary(fit1)
 
 # Calcuate the Mean Square Error for the training set (Train Error)
+# MSE = average (yi - yhat)^2
 mean((Auto$mpg-predict(fit1, Auto))[train]^2)
 
 # Calculate the Mean Square Error for the testing set (Test Error)
@@ -31,10 +34,12 @@ mean((Auto$mpg-predict(fit1, Auto))[-train]^2)
 
 # We can continue to the do the same thing for quadratic and cubic regressions.
 fit2 <- lm(mpg~poly(horsepower, 2), data=Auto, subset=train)
+summary(fit2)
 mean((Auto$mpg-predict(fit2, Auto))[train]^2)
 mean((Auto$mpg-predict(fit2, Auto))[-train]^2)
 
 fit3 <- lm(mpg~poly(horsepower, 3), data=Auto, subset=train)
+summary(fit3)
 mean((Auto$mpg-predict(fit3, Auto))[train]^2)
 mean((Auto$mpg-predict(fit3, Auto))[-train]^2)
 
@@ -67,8 +72,9 @@ loocv = function(fit){
 # Now we use the loocv() function to perform the cross validation
 loocv(glm.fit)
 
-# Using a for loop to check the the k-fold cross validation comparison
-# Try to use 10 cross validation outcomes
+# Using a for loop to compare the the k-fold cross validation process.
+# Try to compare LOOVC, 10-fold, and 5-fold cross validation outcomes.
+# First we use the LOOVC to get the CV error for each polynomial form.
 cv.error <- rep(0,10)
 # Degree of polynomial from 1 to 10
 degree <- 1:10
@@ -77,20 +83,39 @@ for(d in degree){
   cv.error[d] <- loocv(glm.fit)
 }
 
+cv.error
+
 # Plot the cv error and compare different degrees for cross validation
 plot(degree,cv.error,type="b")
 
 
 # Now, let's try to use the 10-fold cross validation
-# Try to use 5 cross validation outcomes with degree of polynomial from 1 to 10
-cv.error10 <- rep(0,5)
+# Try to use 10-fold cross validation outcomes with degree of polynomial from 1 to 10
+cv.error10 <- rep(0,10)
 for(d in degree){
   glm.fit <- glm(mpg~poly(horsepower, d), data=Auto)
   cv.error10[d] <- cv.glm(Auto,glm.fit, K=10)$delta[1]
 }
 
+cv.error10
+
 # Plot the line that represents the degree and cv error
 lines(degree, cv.error10, type="b", col="red")
+
+
+# Try to use 5-fold cross validation outcomes with degree of polynomial from 1 to 10
+cv.error5 <- rep(0,10)
+for(d in degree){
+  glm.fit <- glm(mpg~poly(horsepower, d), data=Auto)
+  cv.error5[d] <- cv.glm(Auto,glm.fit, K=5)$delta[1]
+}
+
+cv.error5
+
+# Plot the line that represents the degree and cv error
+lines(degree, cv.error5, type="b", col="blue")
+
+
 
 # Bootstrap
 # Minimum Risk Investment - Section 5.2
@@ -115,8 +140,9 @@ set.seed(1)
 # Use the alpha.fn() function again on the 100 sample in the data set
 alpha.fn(Portfolio,sample(1:100,100,replace=TRUE))
 
+?boot
 # Use boot() function for repeated measures by 1000 times
-boot.out <- boot(Portfolio,alpha.fn,R=1000)
+boot.out <- boot(Portfolio,alpha.fn,R=5000)
 boot.out
 
 # Plotting the bootstrap output
@@ -139,7 +165,31 @@ coef(lm(mpg~horsepower, data=Auto))
 # Now, let's try to set up a random seed and generate a random sample with replacement.
 set.seed(1)
 boot_s1 <- sample(392, 392, replace=TRUE)
+boot_s1
 boot.fn(Auto, boot_s1)
 
 boot_s2 <- sample(392, 392, replace=TRUE)
+boot_s2
 boot.fn(Auto, boot_s2)
+
+# Using Bootstrap to repeat the resampling with replacement 1000 times.
+boot.lm <- boot(Auto, boot.fn, R=1000)
+boot.lm
+
+# Plot the resampling distribution for the estimated intercept coefficient.
+plot(boot.lm, index=1)
+
+# Plot the resampling distribution for the estimated coefficient for horsepower.
+plot(boot.lm, index=2)
+
+# Create a function to extract the adjusted R square.
+boot.r <- function(data,index){
+  return(summary(lm(mpg~horsepower,data=data, subset=index))$adj.r.square)
+}
+
+# Using bootstrap to repeat the resampling with replacement 5000 times.
+boot.r <- boot(Auto, boot.r, R=5000)
+boot.r
+
+# Plot the resampling distribution for the adjusted R square.
+plot(boot.r)
