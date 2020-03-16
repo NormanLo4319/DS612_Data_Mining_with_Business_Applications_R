@@ -9,7 +9,7 @@ This repositary bases on "An Introduction to Statistical Learning with Applicati
 ## Course Outline
 ### Introduction to R:
 ---
-In this lab, we introduce some simple R commands.  The best way to learn a new language is to try it out.  R can be downloaded from [here](http://cran.r-project.org/)
+In this lab, we introduce some simple R commands and R-studio environment.  The best way to learn a new language is to try it out.  R can be downloaded from [here](http://cran.r-project.org/)
 
 Learning Objectives:
 1. Learning how to find and set your working directory on your machine.
