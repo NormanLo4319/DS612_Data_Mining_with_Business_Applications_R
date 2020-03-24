@@ -1,5 +1,5 @@
 # Data Mining with Business Applications (R)
-An introduction to statistical learning with application in R.  This course helps students develop a set of Statistical Learning techniques to extract pertinent information from data and make informed business decisions.
+An introduction to statistical learning with application in R.  This course helps students develop a set of Statistical Learning techniques to extract pertinent information to make informed business decisions.
 
 ## Textbook
 This repositary bases on "An Introduction to Statistical Learning with Application in R" by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.  You can check the textbook details [online](http://faculty.marshall.usc.edu/gareth-james/).
