@@ -1,11 +1,16 @@
+#---------------------------------------#
+#---------------Chapter 8---------------#
+#-----------Tree-Based Methods----------#
+#---------------------------------------#
+
 # Fitting Classifiction Tree Models
 
+# If you cannot find the "tree" library in R use this package
+install.packages("tree")
 # book's Libraray
 library(ISLR) 
-#This libraray is essential to fit decision trees
+# This libraray is essential to fit decision trees
 library(tree) 
-# If you cannot find it in R use this package
-install.packages("tree")
 
 # The dataset is from ISLR Library
 attach(Carseats) 
@@ -54,7 +59,7 @@ plot(Tree_Model) # note there is no text on the tree
 text(Tree_Model, pretty = 0) # Use pretty = 0 only when you have categorical variables
 
 #Let's check the model based on the test data
-Tree_pred = predict(Tree_Model,testingData,type = "class") #Since our predictions are on categorical variables we used type = "class"
+Tree_pred = predict(Tree_Model,testingData,type="class") #Since our predictions are on categorical variables we used type = "class"
 
 # Let's compute the error
 mean(Tree_pred != Testing_outcome) #0.23
@@ -66,19 +71,19 @@ mean(Tree_pred != Testing_outcome) #0.23
 set.seed(3) 
 
 # Since we dealt with classification we neede ot set FUN to prune.misclass 
-cv_tree = cv.tree(Tree_Model, FUN = prune.misclass) 
+cv_tree = cv.tree(Tree_Model, FUN=prune.misclass) 
 # Size is the size of the tree, Dev is cross-validation error rate
 names(cv_tree) 
-plot(cv_tree$size,cv_tree$dev,type = "b")
+plot(cv_tree$size,cv_tree$dev,type="b")
 # Our min happened at size = 9, you may get a different answer based on your random seeds
 
 # Now let's prune our tree - that is the gardening time!
 # We pruned our model based on best size we found
-pruned_Model = prune.misclass(Tree_Model, best = 9) 
+pruned_Model = prune.misclass(Tree_Model, best=9) 
 # in cross-validation - remember it was 9 (you might have found another number)
 plot(pruned_Model)
 text(pruned_Model)
 
-Tree_pred_new = predict(pruned_Model,testingData,type = "class")
+Tree_pred_new = predict(pruned_Model,testingData,type="class")
 mean(Tree_pred_new != Testing_outcome) 
 # error decreased to 22.5% Slightly better than what we had earlier

@@ -1,6 +1,12 @@
+#---------------------------------------#
+#---------------Chapter 8---------------#
+#-----------Tree-Based Methods----------#
+#---------------------------------------#
+
 # Regression Tree Models
 
-rm(list=ls(all=TRUE)) 
+# Remove or clear all memories in the global environment
+rm(list=ls(all=TRUE))
 
 # book's Libraray
 library(ISLR) 
@@ -64,10 +70,10 @@ plot(cv_tree$size,cv_tree$dev,type="b")
 
 
 # Now let's prune our tree - that is the gardening time!
-pruned_Model = prune.tree(Tree_Model, best = 12) #We pruned our model based on best size we found
+pruned_Model = prune.tree(Tree_Model, best=12) #We pruned our model based on best size we found
 # in cross-validation - remember it was 12 (you might have found another number)
 plot(pruned_Model)
-text(pruned_Model,pretty = 0)
+text(pruned_Model,pretty=0)
 
 Tree_pred_new = predict(pruned_Model,testingData)
 mean((Tree_pred_new - Testing_outcome)^2) #error decreased to 4.667
