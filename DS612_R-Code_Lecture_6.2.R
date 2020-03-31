@@ -5,6 +5,9 @@
 
 # Fitting Classifiction Tree Models
 
+# Remove or clear all memories in the global environment
+rm(list=ls(all=TRUE))
+
 # If you cannot find the "tree" library in R use this package
 install.packages("tree")
 # book's Libraray
@@ -54,9 +57,11 @@ Testing_outcome = High[test] # The is the our test outcomes
 
 # Now it is the TREE TIME :)
 # You need to use training data
-Tree_Model = tree(High~.,trainingData)
+Tree_Model = tree(High~., trainingData)
+summary(Tree_Model)
+
 plot(Tree_Model) # note there is no text on the tree
-text(Tree_Model, pretty = 0) # Use pretty = 0 only when you have categorical variables
+text(Tree_Model, pretty=0) # Use pretty = 0 only when you have categorical variables
 
 #Let's check the model based on the test data
 Tree_pred = predict(Tree_Model,testingData,type="class") #Since our predictions are on categorical variables we used type = "class"
@@ -68,13 +73,14 @@ mean(Tree_pred != Testing_outcome) #0.23
 
 # May be we can do better with pruning
 # again, you can set it to any number!
-set.seed(3) 
+set.seed(1) 
 
 # Since we dealt with classification we neede ot set FUN to prune.misclass 
 cv_tree = cv.tree(Tree_Model, FUN=prune.misclass) 
 # Size is the size of the tree, Dev is cross-validation error rate
 names(cv_tree) 
-plot(cv_tree$size,cv_tree$dev,type="b")
+cv_tree
+plot(cv_tree$size, cv_tree$dev, type="b")
 # Our min happened at size = 9, you may get a different answer based on your random seeds
 
 # Now let's prune our tree - that is the gardening time!
@@ -82,8 +88,8 @@ plot(cv_tree$size,cv_tree$dev,type="b")
 pruned_Model = prune.misclass(Tree_Model, best=9) 
 # in cross-validation - remember it was 9 (you might have found another number)
 plot(pruned_Model)
-text(pruned_Model)
+text(pruned_Model, pretty=0)
 
-Tree_pred_new = predict(pruned_Model,testingData,type="class")
+Tree_pred_new = predict(pruned_Model, testingData, type="class")
 mean(Tree_pred_new != Testing_outcome) 
 # error decreased to 22.5% Slightly better than what we had earlier
