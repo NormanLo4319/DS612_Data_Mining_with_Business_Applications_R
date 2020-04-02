@@ -18,7 +18,7 @@ library(MASS)
 # We are going to use the Boston data set from MASS library
 ?Boston
 
-
+# Splitting data into training and testing sets (50/50)
 set.seed(1)
 NumberofObservations = dim(Boston)[1]
 SplitofTrainTest = 0.5 #let's split the data 50/50
@@ -54,7 +54,7 @@ importance(bag.boston)
 varImpPlot(bag.boston)
 
 # Make prediction with the trained model by passing in the testing dataset
-predict.bag = predict(bag.boston,newdata = testingData)
+predict.bag = predict(bag.boston, newdata=testingData)
 
 # Plot the prediction and testing outcome
 plot(predict.bag,Testing_outcome)
@@ -79,7 +79,7 @@ MSE.bag.25Trees #Our error increased
 # In random Forest we only need to change the mtry so that we get the minimum MSE, 
 # so, let's try different size of ntry - from 1 to 13
 
-# Using a for loop to run different size of ntry
+# Using a for loop to run different size of mtry (number of predictors to be consider for each split of the tree)
 MSE.Rf=rep(0,13)
 for(d in 1:13){
   rf.boston = randomForest(medv~., data=trainingData, mtry=d, importance=TRUE)
@@ -92,8 +92,8 @@ MTRY = c(1:13)
 plot(MTRY,MSE.Rf,type="b",col="red")
 min(MSE.Rf)
 
-# mtry=6 created the minimum error - if you repeat this over and over you may get another miminizers such as 4 or 5
-rf.boston = randomForest(medv~., data=trainingData, mtry=6, importance=TRUE)
+# mtry=4 created the minimum error - if you repeat this over and over you may get another miminizers such as 4 or 5
+rf.boston = randomForest(medv~., data=trainingData, mtry=4, importance=TRUE)
 
 # Getting the prediction from the best model
 predict.rf = predict(rf.boston, newdata=testingData)
@@ -107,7 +107,6 @@ importance(rf.boston)
 
 # Plot the importance measures
 varImpPlot(rf.boston)
-
 
 ########################
 ######  Boosting #######
@@ -155,7 +154,7 @@ for(d in Lambda){
 # The miminum happened at Lambda = 0.01
 plot(Lambda,MSE.Boost,type="b",col="red") 
 
-# 10.31 much less than random forest
+# 17.79736 less than random forest
 min(MSE.Boost) 
 
 # Now let's fix Lambda and change size of the tree
@@ -171,11 +170,13 @@ for(d in TreeSize){
   Counter = Counter + 1
 }
 
-# The miminum happened at Lambda = 0.01
+# The tree size reaches miminum at 4000
 plot(TreeSize,MSE.Boost.Tree,type="b",col="red")
 
-# it seems like 5000 was a very good choice
+# it seems like 4000 was a very good choice
 min(MSE.Boost.Tree) 
+
+MSE.Boost.Tree
 
 #Another parameter you can play with is interation.depth
 
