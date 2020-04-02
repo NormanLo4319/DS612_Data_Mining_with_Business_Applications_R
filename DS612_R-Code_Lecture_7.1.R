@@ -31,6 +31,7 @@ preds = predict(fit.Poly,newdata = list(age=age.grid),se = TRUE)
 names(preds)
 se.bands = cbind(preds$fit+2*preds$se.fit,preds$fit-2*preds$se.fit)
 
+
 # Plot the data dn add the fit from the degree-4 polynomial
 plot(age,wage,col="darkgray")
 lines(age.grid,preds$fit,lwd=2,col="blue") #lwd is linewidth
@@ -44,14 +45,24 @@ fitc = lm(wage~education + poly(age,2),data=Wage)
 fitd = lm(wage~education + poly(age,3),data=Wage)
 fite = lm(wage~education + poly(age,4),data=Wage)
 
+# The p-value indicates the model with the prior model
+# The p-vlaue is significant means the prior model is not sufficient
+# or the current model is better then the prior model
 anova(fita,fitb,fitc,fitd,fite)
 
 
 #### Logistic Regression ####
+# Fitting the logistic regression model on binary response, wage,
+# using wrapper I() to create binary response, over 250 (True) and below or equal 250 (False)
+# on age with polynomial degree 3
 fit.Logistics = glm(I(wage>250)~poly(age,3), data=Wage, family=binomial)
 summary(fit.Logistics)
+
+# Predict the response by the age grid created earlier
 preds.Logistics = predict(fit.Logistics, newdata=list(age=age.grid), se=TRUE)
 names(preds.Logistics)
+
+# Create the confidence intervals for the prediction
 se.bands = preds.Logistics$fit+cbind(fit=0, lower=-2*preds.Logistics$se.fit, upper=2*preds.Logistics$se.fit)
 se.bands[1:5,]
 
@@ -59,8 +70,8 @@ se.bands[1:5,]
 prob.bands = exp(se.bands)/(1+exp(se.bands))
 prob.bands[1:5,]
 
+# Plot the predictions with confidence intervals
 matplot(age.grid,prob.bands,col="blue",lwd=c(2,1,1),lty=c(1,2,2),type="l")
-
 
 #### Fitting step functions ####
 # In order to fit a step function, we need to use the cut() function
