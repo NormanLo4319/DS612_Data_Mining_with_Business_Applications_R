@@ -35,9 +35,9 @@ Testing_outcome = Boston$medv[test]
 
 # Bagging is simply a special case of random forest with m = p (All predictors are used to grow trees)
 bag.boston = randomForest(medv~., data=trainingData, mtry=13, importance=TRUE)
-# mtry is the nymber of variables randomly sampled as candidates at each slpit. 
-# The defult is sqrt(p) in classification and p/3 in regression
-# The defult number of trees is 500
+# mtry is the number of variables randomly sampled as candidates at each slpit. 
+# The default is sqrt(p) in classification and p/3 in regression
+# The default number of trees is 500
 bag.boston
 names(bag.boston)
 summary(bag.boston)
@@ -65,16 +65,16 @@ MSE.bag = mean((predict.bag - Testing_outcome )^2)
 MSE.bag
 
 # What if we choose less than 500 trees?
-
-bag.boston = randomForest(medv~., data=trainingData, mtry=13, importance=TRUE, ntree=25)
+# Let's build a forest with 50 trees
+bag.boston = randomForest(medv~., data=trainingData, mtry=13, importance=TRUE, ntree=50)
 predict.bag = predict(bag.boston, newdata=testingData)
-MSE.bag.25Trees = mean((predict.bag - Testing_outcome )^2)
-MSE.bag.25Trees #Our error increased
+MSE.bag.50Trees = mean((predict.bag - Testing_outcome )^2)
+MSE.bag.50Trees #Our error increased
 
 
-#######################
-#### random Forest ####
-#######################
+###########################
+###### Random Forest ######
+###########################
 
 # In random Forest we only need to change the mtry so that we get the minimum MSE, 
 # so, let's try different size of ntry - from 1 to 13
@@ -91,9 +91,10 @@ MTRY = c(1:13)
 # Plot the MSE for each size of ntry
 plot(MTRY,MSE.Rf,type="b",col="red")
 min(MSE.Rf)
+data.frame(MTRY, MSE.Rf)
 
-# mtry=4 created the minimum error - if you repeat this over and over you may get another miminizers such as 4 or 5
-rf.boston = randomForest(medv~., data=trainingData, mtry=4, importance=TRUE)
+# mtry=3 created the minimum error - if you repeat this over and over you may get another miminizers such as 4 or 5
+rf.boston = randomForest(medv~., data=trainingData, mtry=3, importance=TRUE)
 
 # Getting the prediction from the best model
 predict.rf = predict(rf.boston, newdata=testingData)
@@ -119,7 +120,7 @@ set.seed(1)
 
 # If you are running regression problems then use distribution = "gaussian". If you are working on 
 # binary classfiication problems, then use distribution = "bernoulli"
-# The default value of Lambda is 0.001
+# The default value of Lambda is 0.001 (learning rate of the tree model)
 boost.boston = gbm(medv~., data=trainingData, distribution="gaussian", n.trees=5000, interaction.depth=4)
 boost.boston
 summary(boost.boston)
@@ -130,6 +131,7 @@ summary(Boston$medv)
 # integerating out the other variables. as we expect medv is increasing with rm and decreasing with lstat
 plot(boost.boston,i="rm")
 plot(boost.boston,i="lstat")
+?Boston
 
 # Get the prediction from the boosting model
 predict.boost = predict(boost.boston, newdata=testingData, n.trees=5000)
@@ -156,6 +158,7 @@ plot(Lambda,MSE.Boost,type="b",col="red")
 
 # 17.79736 less than random forest
 min(MSE.Boost) 
+data.frame(Lambda, MSE.Boost)
 
 # Now let's fix Lambda and change size of the tree
 TreeSize = c(50,100,200,400,500,1000,2000,3000,4000,5000,6000,7000,8000,9000,10000)
@@ -175,9 +178,6 @@ plot(TreeSize,MSE.Boost.Tree,type="b",col="red")
 
 # it seems like 4000 was a very good choice
 min(MSE.Boost.Tree) 
-
-MSE.Boost.Tree
+data.frame(TreeSize,MSE.Boost.Tree)
 
 #Another parameter you can play with is interation.depth
-
-
