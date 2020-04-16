@@ -75,7 +75,7 @@ mean(Tree_pred != Testing_outcome) #0.23
 # again, you can set it to any number!
 set.seed(1) 
 
-# Since we dealt with classification we neede ot set FUN to prune.misclass 
+# Since we dealt with classification we need to set FUN to prune.misclass 
 cv_tree = cv.tree(Tree_Model, FUN=prune.misclass) 
 # Size is the size of the tree, Dev is cross-validation error rate
 names(cv_tree) 
