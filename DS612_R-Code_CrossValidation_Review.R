@@ -42,11 +42,11 @@ fit1_testMSE
 # Model 2 MSEs
 # Training MSE
 fit2_trainPred <- predict(fit2, newdata=trainData)
-fit2_trainMSE <- mean((fit2_trainPred - trainOutcome )^2)
+fit2_trainMSE <- mean((fit2_trainPred - trainOutcome)^2)
 fit2_trainMSE
 # Testing MSE
 fit2_testPred <- predict(fit2, newdata=testData)
-fit2_testMSE <- mean((fit2_testPred - testOutcome )^2)
+fit2_testMSE <- mean((fit2_testPred - testOutcome)^2)
 fit2_testMSE
 
 # Model 3 MSEs
@@ -123,7 +123,7 @@ legend(2.5, 24, legend=c("testMSE", "trainMSE", "LOOCVMSE"),
        lty=1)
 
 
-# 5-Folds & 10-Folds Cross-Validation
+# K-Folds Cross-Validation
 # 5-Fold Cross-Validation
 # Model 1 MSE
 fit1_5fold <- cv.glm(Auto, fit1, K=5)$delta[1]
@@ -140,15 +140,15 @@ fit3_5fold
 
 # 10-Fold Cross-Validation
 # Model 1 MSE
-fit1_10fold <- cv.glm(Auto, fit1, K=5)$delta[1]
+fit1_10fold <- cv.glm(Auto, fit1, K=10)$delta[1]
 fit1_10fold
 
 # Model 1 MSE
-fit2_10fold <- cv.glm(Auto, fit2, K=5)$delta[1]
+fit2_10fold <- cv.glm(Auto, fit2, K=10)$delta[1]
 fit2_10fold
 
 # Model 1 MSE
-fit3_10fold <- cv.glm(Auto, fit3, K=5)$delta[1]
+fit3_10fold <- cv.glm(Auto, fit3, K=10)$delta[1]
 fit3_10fold
 
 fold5_MSEs <- c(fit1_5fold, fit2_5fold, fit3_5fold)
