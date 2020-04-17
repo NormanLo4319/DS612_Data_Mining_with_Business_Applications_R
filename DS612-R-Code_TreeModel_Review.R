@@ -4,6 +4,7 @@
 rm(list=ls(all=TRUE))
 library(randomForest)
 library(ISLR)
+library(MASS)
 library(tree)
 library(gbm)
 
@@ -29,7 +30,7 @@ testData  = boston[test,]
 testOutcome = boston$homePrice[test]
 
 # Fitting a Classification Tree Model
-treeFit <- tree(homePrice~., data=boston)
+treeFit <- tree(homePrice~., data=trainData)
 summary(treeFit)
 
 # Plot the tree diagram
@@ -42,7 +43,7 @@ treeFit
 # Check the test error rate
 treePred <- predict(treeFit, testData, type="class")
 table(treePred,testOutcome)
-mean(treePred != testOutcome)  # 0.04854
+mean(treePred != testOutcome)  # 0.199029
 
 
 # Fitting a Prunning Tree Model
@@ -53,7 +54,7 @@ cv5_Tree <- cv.tree(treeFit, FUN=prune.misclass, K=5)
 cv5_Tree
 
 # Plot the result
-plot(cvTree$size, cvTree$dev, type="b", col="blue")
+plot(cv5_Tree$size, cv5_Tree$dev, type="b", col="blue")
 
 # 10-fold Cross Validation
 cv10_Tree <- cv.tree(treeFit, FUN=prune.misclass, K=10)
@@ -61,13 +62,13 @@ cv10_Tree
 
 # Plot the result
 lines(cv10_Tree$size, cv10_Tree$dev, type="b", col="red")
-legend(12, 150, legend=c("5-Fold CV", "10-Fold CV"),
+legend(12, 80, legend=c("5-Fold CV", "10-Fold CV"),
        col=c("blue", "red"), lty=1)
 
-# Both 5-fold and 10-fold CVs confirmed the best size of the tree is 3
+# Both 5-fold and 10-fold CVs confirmed the best size of the tree is 4
 
 # Fitting the best prunning tree
-prunedFit = prune.misclass(treeFit, best=3)
+prunedFit = prune.misclass(treeFit, best=4)
 prunedFit
 
 # Plot the Pruned Tree
@@ -77,7 +78,7 @@ text(prunedFit, pretty=0)
 # Check the test error rate for the pruned tree
 prunedPred <- predict(prunedFit, testData, type="class")
 table(prunedPred,testOutcome)
-mean(prunedPred != testOutcome)  # 0.1165
+mean(prunedPred != testOutcome)  # 0.1359
 
 
 # Bagging 
@@ -93,16 +94,16 @@ importance(bagTreeFit)
 varImpPlot(bagTreeFit)
 
 # Check the testing error rate
-bagTreePred <- predict(bagTreeFit, newdata=testData)
+bagTreePred <- predict(bagTreeFit, newdata=testData, type="class")
 table(bagTreePred,testOutcome)
-mean(bagTreePred != testOutcome)  # 0.11165
+mean(bagTreePred != testOutcome)  # 0.1165
 
 # Random Forest
 # Now, let's see what is a good number of predictors to use for spliting the tree
 rfError = rep(0,13)
 for(d in 1:13){
-  rfTreeFit = randomForest(homePrice~., data=trainData, mtry=d, importance=TRUE)
-  rfTreePred = predict(rfTreeFit, newdata=testData)
+  rfTreeFit = randomForest(homePrice~., data=trainData, mtry=d, importance=TRUE, ntree=1000)
+  rfTreePred = predict(rfTreeFit, newdata=testData, type='class')
   rfError[d] = mean(rfTreePred != testOutcome)
 }
 MTRY = c(1:13)
@@ -112,7 +113,7 @@ plot(MTRY, rfError, type="b", col="blue")
 data.frame(MTRY, rfError)
 
 # Use maximum 3 predictors for spliting trees from bootstrap data set
-rfTreeFit = randomForest(homePrice~., data=trainData, mtry=3, importance=TRUE)
+rfTreeFit = randomForest(homePrice~., data=trainData, mtry=3, importance=TRUE, ntree=500)
 summary(rfTreeFit)
 
 # Check the most important predictor from the data
@@ -122,9 +123,9 @@ importance(rfTreeFit)
 varImpPlot(rfTreeFit)
 
 # Check the testing error rate
-rfTreePred <- predict(rfTreeFit, newdata=testData)
+rfTreePred <- predict(rfTreeFit, newdata=testData, type="class")
 table(rfTreePred,testOutcome)
-mean(rfTreePred != testOutcome)  # 0.092233
+mean(rfTreePred != testOutcome)  # 0.0873786
 
 
 # Boosting
@@ -140,6 +141,7 @@ summary(boostTreeFit)
 # Check the testing error rate
 testOutcome2 = testData$price
 boostTreePred <- predict(boostTreeFit, newdata=testData, n.trees=5000)
+boostTreePred
 boostTreePred <- ifelse(boostTreePred > 0, 1, 0)
 table(boostTreePred,testOutcome2)
-mean(boostTreePred != testOutcome2)  #0.92233
+mean(boostTreePred != testOutcome2)  #0.0873786
