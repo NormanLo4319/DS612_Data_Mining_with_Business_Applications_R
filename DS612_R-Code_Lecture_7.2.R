@@ -12,6 +12,7 @@ library(ISLR)
 # The bs() function generates the entire matrix of basis functions for splines
 # with the specified set of knots. By default the cubic splines are produced.
 attach(Wage)
+?Wage
 
 # We speified knots at ages 25, 40, and 60, which produces a spline with 6 basis functions
 # The bs() function, by default, genearte a cubic splines model
@@ -59,6 +60,7 @@ matlines(age.grid,se.bands2, col="red", lty=2)
 # Fitting the smooth spline by using the smooth.spline() function 
 # We use 16 degree of freedom to determines the value of lamda
 fit.SS = smooth.spline(age, wage, df=16)
+
 # We then select the smoothness level by cross-validation with cv=TRUE
 fit.SS2 = smooth.spline(age, wage, cv=TRUE)
 names(fit.SS2)
@@ -84,7 +86,7 @@ lines(age.grid,Predict.LRL, col="blue", lwd=2)
 lines(age.grid,Predict.LRL2, col="red", lwd=2)
 
 
-### GAMS ####
+### General Additive Models GAMs ####
 install.packages("gam")
 library(gam)
 
@@ -98,7 +100,7 @@ summary(gam1)
 # Plot the prediction
 plot(gam1, se=TRUE, col="blue")  # not an impressive representation"
 par(mfrow=c(1,3)) # Show 3 outcomes 1 for each variable  year, age, education
-plot.gam(gam1,se=TRUE, col="red")
+plot(gam1,se=TRUE, col="red")
 
 
 ### ANOVA IN GAM ###
