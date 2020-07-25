@@ -98,3 +98,4 @@ In this section, we are relaxing the linearity assumption while still attempting
 4. Smoothing Splines
 5. Local Regression
 
+Copyright © 2019 Norman Lo
